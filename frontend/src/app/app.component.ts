@@ -1,9 +1,15 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterLink, RouterOutlet } from '@angular/router';
+
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+
+  imports: [RouterOutlet, RouterLink,ReactiveFormsModule,FormsModule],
+
+
+  
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
