@@ -12,10 +12,11 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-home',
   
-  templateUrl: './home.component.html',
+  
   imports: [CommonModule, ReactiveFormsModule, FormsModule,SongModule,RouterLink],
   standalone: true,
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  templateUrl: './home.component.html'
 })
 
 

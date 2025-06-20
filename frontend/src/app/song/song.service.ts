@@ -9,13 +9,16 @@ import { Song } from './song';
 export class SongService {
 
   constructor(private _httpClient:HttpClient) {  }
-  private base = "/api/v1/routes"
+  private base = "http://localhost:3000/data";
 
+
+
+ 
 // alle Lider
 getAllSongs():Observable<Song[]>{
-  return this._httpClient.get<Song[]>(`${this.base}`)
+  return this._httpClient.get<Song[]>(this.base);
 }
-
+/*
 // nach Jahreszahl irgentwie
 getNachJahr(year:Number):Observable<Song[]>{
   return this._httpClient.get<Song[]>(`${this.base}/${year}`)
@@ -33,5 +36,5 @@ delete(year:Song){
 update(data:Song){
   return this._httpClient.put<Song[]>(`${this.base}/${data.year}`,data)
 }
-
+*/
 }

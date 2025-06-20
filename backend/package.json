@@ -11,7 +11,7 @@
     "scripts": {
   
       
-    "start": "node routes.js",
+    "start": "node index.js",
     "test": "echo \"Error : nope \"&& exit 1 "
 },
       
