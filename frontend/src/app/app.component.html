@@ -1,20 +1,17 @@
-<div class="container mt-4">
-  <h3>Music Playlist</h3>
-  <table class="table table-striped mt-3">
-    <thead>
-      <tr>
-        <th>Year</th>
-        <th>Name</th>
-        <th>Author</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let song of songs">
-        <td>{{ song.year }}</td>
-        <td>{{ song.name }}</td>
-        <td>{{ song.author }}</td>
-      </tr>
-    </tbody>
-  </table>
+
+<div class="container" style="width: 850px;">
+<br>
+<h3 style="color: blueviolet; text-align: center;"><strong>Music Playlist</strong></h3>
+  <nav class=" navbar navbar-expand-lg navbar-dark bg-info">
+<div class="container-fluid">
+<a class ="navbar-brand" href="#">Home</a>
+<button class="btn btn btn-primary my-2 my-sm-0" style="width: 100px; " routerLink="song/create" type="submit">Add+ </button>
+
+
 </div>
 
+  </nav>
+
+</div>
+
+<router-outlet></router-outlet>

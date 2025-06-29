@@ -1,20 +1,30 @@
-<div class ="container">
 
-    <table class=" table table-tripped mt-2 ">
+<div class="container" style="width: 700px;"> 
+
+    <br>
+    <input type="search" (input)="filterSong(filter.value)" placeholder="search" name="inputsearch" year="inputsearch" #filter>
+    
+    
+    <table class=" table table-tripped mt-2 " style="border:1px rgb(214, 26, 208)">
+
         <thead>
-            <tr>
-
-                <th scope ="col">Year</th>
-                <th scope ="col">Name</th>
+            <tr class="bg-primary">
+    
+                <th (click)="sortBy('year')" scope ="col">Year</th>
+                <th (click)="sortBy('name')" scope ="col">Name</th>
                 <th scope ="col">Author</th>
+                <th scope ="col">Edit</th>
+                <th scope ="col">Delete</th>
 
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let song of songs">
+            <tr *ngFor="let song of filteredSongs">
                 <td scope="row">{{song.year}}</td>
                 <td>{{song.name}}</td>
                 <td>{{song.author}}</td>
+                <td><button [routerLink]="['/song/edit',song.year]" class="btn btn-secondary" >Edit</button></td>
+                <td><button class="btn btn-secondary" (click)="delete(song)" >Delete</button></td>
             </tr>
         </tbody>
     </table>

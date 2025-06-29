@@ -7,34 +7,35 @@ import { Song } from './song';
   providedIn: 'root'
 })
 export class SongService {
+  getByYear(year: Number) {
+    throw new Error('Method not implemented.');
+  }
 
   constructor(private _httpClient:HttpClient) {  }
-  private base = "http://localhost:3000/data";
-
-
+  private baseUrl = "/api/v1/data";//!!!!!!
 
  
 // alle Lider
 getAllSongs():Observable<Song[]>{
-  return this._httpClient.get<Song[]>(this.base);
+  return this._httpClient.get<Song[]>(`${this.baseUrl}`)
 }
-/*
+
 // nach Jahreszahl irgentwie
 getNachJahr(year:Number):Observable<Song[]>{
-  return this._httpClient.get<Song[]>(`${this.base}/${year}`)
+  return this._httpClient.get<Song[]>(`${this.baseUrl}/${year}`)
 }
 // create
 create(data:Song){
-  return this._httpClient.post<Song[]>(`${this.base}`,data)
+  return this._httpClient.post<Song[]>(`${this.baseUrl}`,data)
 }
 //delete
 delete(year:Song){
-  return this._httpClient.delete<Song[]>(`${this.base}/${year}`)
+  return this._httpClient.delete<Song[]>(`${this.baseUrl}/${year}`)
 }
 
 //updaten
 update(data:Song){
-  return this._httpClient.put<Song[]>(`${this.base}/${data.year}`,data)
+  return this._httpClient.put<Song[]>(`${this.baseUrl}/${data.year}`,data)
 }
-*/
+
 }

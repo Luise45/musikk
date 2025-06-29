@@ -1,17 +1,20 @@
-// @create-index
-
 const express = require('express');
-
 const cors = require('cors');
 const fs = require('fs');
+const routes = require('./routes');
 
 const app = express();
+
 const PORT = 3000;
 
 
 app.use(express.json());
 
 app.use(cors());
+app.use('/', routes);
+
+
+
 
 app.get('/data',(req, res) => {
     fs.readFile('./data.json', 'utf8', (err, data) => {
@@ -26,6 +29,6 @@ app.listen(PORT, (error) => {
     if (error) {
         console.log(error);
     } else {
-        console.log('Backend running at http://localhost:${PORT}');
+        console.log(`Backend running at http://localhost:${PORT}`);
     }
 });

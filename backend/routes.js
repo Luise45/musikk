@@ -1,80 +1,90 @@
 
 
+const express = require('express')
+
+const cors= require("cors")
+const app=express()
+const port=process.env.port|| 3000
+const fs= require("fs")
+const data = require('./data.json')
 
 
-const express = require('express');
-const router = express.Router();
+
+app.use(cors())
+app.use(express.json())
+
+app.listen(port,(err)=>{
+    console.log('Server is runinng on port ${port}');
+})
 
 
-const data = require('./data.json');
 
 
-
-//data array rquired???
-
-router.get('/data', (req, res) => {
+app.get('/api/v1/data', (req, res) => {
 
 return res.json(data)
 });
 
 // suchen mit Jahreszahl(get)
 
-router.get("/data/:year", (req, res) => {
+app.get("/api/v1/data/:year", (req, res) => {
 
     const yearParameter = Number(req.params.year);
+    const datas= data.find(item => item.year == yearParameter);
+       return res.json(datas);
    
-    const datas= data.find(i => i.year == yearParameter);
-    if(datas){
-
-       return res.json(data);
-    }
-    else{
-return res.status(404).json({message: "upss"})
-    }
 });
 
 
 //Neues 'data' hinzufuegen(post)
 
-router.post("/data", (req, res) => {
+app.post("/api/v1/data", (req, res) => {
 
-    const newEnt = data.length > 0 ? data[data.length -1 ].year +1 : 1;
-    const newData= {year: newEnt, ...req.body};
+    const newEnt = data[data.length -1 ].year +1;
+    delete req.body.year;
+    const newData= Object.assign({year: newEnt},req.body);
     data.push(newData);
     return res.json({message: "new Song!", data: newData});
+
+
+    fs.writeFile("./data.json", JSON.stringify(data), (err,data)=>{
+    if(err) return res.json(err)
+return res.json({Message:"New Order is created succesfully"})
+})
 });
+
 
 //update 'data'
 
-router.put("/data/:year", (req, res) => {
+app.put("/api/v1/data/:year", (req, res) => {
 
     const yearParameter = Number(req.params.year);
-    const dataIndex= data.findIndex(i => i.year == yearParameter);
-   
-    if(dataIndex !== -1 ){
-data[dataIndex] = {year: yearParameter, ...req.body}
-       return res.json({message : "updated", datas: data[dataIndex]});
-    }
-    else{
-return res.status(404).json({message: "upss"})
-    }
+    const dataIndex= data.findIndex(item => item.year == yearParameter);
+   data.splice(dataIndex,1,{...req.body})
+
+   fs.writeFile("./data.json", JSON.stringify(data), (err, data)=>{
+    if(err) return res.json(err)
+return res.json({Message:"New Order is updated succesfully"})
+})
 });
+
 
 
 //loeschen 'data' (delet)
 
-router.delete("/data/:year", (req, res) => {
+app.delete("/api/v1/data/:year", (req, res) => {
 
-    const yearParameter = Number(req.params.year);
-    const dataa= data.filter(i => i.year == yearParameter);
-    if(dataa.length == data.length){
-
-        return res.status(404).json({message: "upss"});
-    }
- let data = require('./data.json');
-   res.json({message: "deleted!"});
+    const yearParameter2 = Number(req.params.year);
+    const dataa= data.filter(item => item.year == yearParameter2);
+   
+   
+    fs.writeFile("./data.json", JSON.stringify(dataa), (err, data)=>{
+        if(err) return res.json(err)
+    return res.json(dataa)
+    })
+   
 });
 
 
-module.exports = router;
+
 

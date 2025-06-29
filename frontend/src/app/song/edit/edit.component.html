@@ -1,1 +1,30 @@
-<p>edit works!</p>
+<div class="container mt-4 pt-4 bg-info" style="width: 830px;height:320px; border: 1px solid;">
+
+    <!--code von https://getbootstrap.com/docs/4.0/components/forms/ ubernommen--> 
+
+<form>
+
+    <div class="form-group">
+
+        <label for="year">Year</label>
+        <input type="number" class="form-control" [(ngModel)]="song.year" name= "year" id="year" aria-describedby="year" placeholder="Enter year">
+      </div>
+
+
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" [(ngModel)]="song.name" name= "name" id="name" aria-describedby="name" placeholder="Enter name">
+    </div>
+
+
+    <div class="form-group">
+      <label for="author">Author</label>
+      <input type="text" class="form-control" name= "auhtor" [(ngModel)]="song.author" id="author" aria-describedby="auhtor" placeholder="Enter auhtor"> 
+    </div>
+    
+<br>
+<button type="submit" (click)="update()" class="btn btn-primary ">Update</button>
+<button type="button" (click)="cancel()" class="btn btn-danger m-2">Cancel</button>
+
+  </form>
+</div>

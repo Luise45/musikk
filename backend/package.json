@@ -11,12 +11,15 @@
     "scripts": {
   
       
-    "start": "node index.js",
-    "test": "echo \"Error : nope \"&& exit 1 "
-},
+    "start": "nodemon routes.js",
+  
       
+    "test": "echo \"Error : nope \"&& exit 1 "
+  
+    },
+  
     "dev": "nodemon index.js",
-
+  
     "author": "Luise Tabatt",
   
     "license": "ISC",
@@ -38,7 +41,7 @@
     "install": "^0.13.0",
   
       
-    "mongoose": "^8.14.3",
+    "mongoose": "^8.16.1",
   
       
     "nodemon": "^3.1.10",
